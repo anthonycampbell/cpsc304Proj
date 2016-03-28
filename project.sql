@@ -71,8 +71,8 @@ create table isMember
        (aa_name varchar(20) not null,
        passport# int not null,
        primary key (aa_name, passport#),
-       foreign key (passport#) references passengers ON DELETE CASCADE,
-       foreign key (aa_name) references air_alliances ON DELETE CASCADE);
+       foreign key (aa_name) references air_alliances ON DELETE CASCADE,
+       foreign key (passport#) references passengers ON DELETE CASCADE);
 
 grant select on isMember to public;
 
@@ -87,8 +87,8 @@ grant select on from_to to public;
 
 create table has_premium_lounge_in
        (airport_code char(3) not null,
-       aa_name varchar(20),
-       primary key (airport_code),
+       aa_name varchar(20) not null,
+       primary key (airport_code, aa_name),
        foreign key (airport_code) references airports ON DELETE CASCADE,
        foreign key (aa_name) references air_alliances ON DELETE CASCADE);
 
@@ -130,7 +130,7 @@ insert into air_alliances
 values('SkyTeam');
 
 insert into air_alliances
-values('Oneworld');
+values('OneWorld');
 
 insert into member_companies
 values('Star Alliance', 'Air Canada');
@@ -192,21 +192,6 @@ values('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE
 insert into airliner_oo2
 values('CA7452', TO_DATE('2016/03/27 18:22:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 17:02:44', 'yyyy/mm/dd hh24:mi:ss'));
 
-insert into isMember
-values('Star Alliance', 935485836);
-
-insert into isMember
-values('SkyTeam', 935485836);
-
-insert into isMember
-values('OneWorld', 936769603);
-
-insert into isMember
-values('Star Alliance', 749648504);
-
-insert into isMember
-values('SkyTeam', 849373939);
-
 insert into passengers
 values(849373939, 'Morgot Anastazja');
 
@@ -221,6 +206,21 @@ values(749648504, 'Darius Butrus');
 
 insert into passengers
 values(950474950, 'Kallisto Teofila');
+
+insert into isMember
+values('Star Alliance', 935485836);
+
+insert into isMember
+values('SkyTeam', 935485836);
+
+insert into isMember
+values('OneWorld', 936769603);
+
+insert into isMember
+values('Star Alliance', 749648504);
+
+insert into isMember
+values('SkyTeam', 849373939);
 
 insert into from_to
 values('PVG', 'YVR');
@@ -247,10 +247,10 @@ insert into has_premium_lounge_in
 values('BOM', 'SkyTeam');
 
 insert into has_premium_lounge_in
-values('PEK', 'Oneworld');
+values('PEK', 'OneWorld');
 
 insert into has_premium_lounge_in
-values('PEK', 'StarAlliance');
+values('PEK', 'Star Alliance');
 
 insert into on_board
 values(849373939, 'AC025', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), 'YVR');
