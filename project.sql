@@ -191,3 +191,78 @@ values('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE
 
 insert into airliner_oo2
 values('CA7452', TO_DATE('2016/03/27 18:22:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 17:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+insert into isMember
+values('Star Alliance', 935485836);
+
+insert into isMember
+values('SkyTeam', 935485836);
+
+insert into isMember
+values('OneWorld', 936769603);
+
+insert into isMember
+values('Star Alliance', 749648504);
+
+insert into isMember
+values('SkyTeam', 849373939);
+
+insert into passengers
+values(849373939, 'Morgot Anastazja');
+
+insert into passengers
+values(935485836, 'Franka Constance');
+
+insert into passengers
+values(936769603, 'Cleon Kyler');
+
+insert into passengers
+values(749648504, 'Darius Butrus');
+
+insert into passengers
+values(950474950, 'Kallisto Teofila');
+
+insert into from_to
+values('PVG', 'YVR');
+
+insert into from_to
+values('YVR', 'PVG');
+
+insert into from_to
+values('ICN', 'YVR');
+
+insert into from_to
+values('YVR', 'BOM');
+
+insert into from_to
+values('YVR', 'PEK');
+
+insert into has_premium_lounge_in
+values('PVG', 'Star Alliance');
+
+insert into has_premium_lounge_in
+values('YVR', 'Star Alliance');
+
+insert into has_premium_lounge_in
+values('BOM', 'SkyTeam');
+
+insert into has_premium_lounge_in
+values('PEK', 'Oneworld');
+
+insert into has_premium_lounge_in
+values('PEK', 'StarAlliance');
+
+insert into on_board
+values(849373939, 'AC025', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), 'YVR');
+
+insert into on_board
+values(935485836, 'AC026', TO_DATE('2016/03/27 13:02:44', 'yyyy/mm/dd hh24:mi:ss'), 'PVG');
+
+insert into on_board
+values(936769603, 'KE071', TO_DATE('2016/03/27 2:02:44', 'yyyy/mm/dd hh24:mi:ss'), 'YVR');
+
+insert into on_board
+values(749648504, 'AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), 'BOM');
+
+insert into on_board
+values(950474950, 'AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), 'BOM');
