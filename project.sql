@@ -24,6 +24,7 @@ grant select on airports to public;
 
 create table passengers
        (passport# int not null,
+       pname varchar(20),
        primary key (passport#));
 
 grant select on passengers to public;
@@ -43,11 +44,11 @@ create table airline_companies
 grant select on airline_companies to public;
 
 create table airliner_oo1
-       (flight# char(5),
-       model# char(5),
+       (flight# char(6),
        ac_name varchar(20) not null,
        to_airport_code char(3) not null,
        from_airport_code char(3) not null,
+       model# varchar(15),
        primary key (flight#),
        foreign key (ac_name) references airline_companies ON DELETE CASCADE,
        foreign key (to_airport_code) references airports ON DELETE CASCADE,
@@ -56,7 +57,7 @@ create table airliner_oo1
 grant select on airliner_oo1 to public;
 
 create table airliner_oo2
-       (flight# char(5) not null,
+       (flight# char(6) not null,
        departure_time date not null,
        arrival_time date not null,
        primary key (flight#, departure_time),
@@ -93,7 +94,7 @@ grant select on has_premium_lounge_in to public;
 
 create table on_board
        (passport# int not null,
-       flight# char(5) not null,
+       flight# char(6) not null,
        departure_time date not null,
        destination char(3),
        primary key (passport#, departure_time),
@@ -105,85 +106,85 @@ create table on_board
 grant select on on_board to public;
 
 insert into member_companies
-('Star Alliance', 'Air Canada');
+values('Star Alliance', 'Air Canada');
 
 insert into member_companies
-('Star Alliance', 'Air China');
+values('Star Alliance', 'Air China');
 
 insert into member_companies
-('Star Alliance', 'Air India');
+values('Star Alliance', 'Air India');
 
 insert into member_companies
-('SkyTeam', 'Korean Air');
+values('SkyTeam', 'Korean Air');
 
 insert into member_companies
-('SkyTeam', 'Air France');
+values('SkyTeam', 'Air France');
 
-insert into ariline_companies
-('Air Canada', 'Dorval');
+insert into airline_companies
+values('Air Canada', 'Dorval');
 
-insert into ariline_companies
-('Air China', 'Beijing');
+insert into airline_companies
+values('Air China', 'Beijing');
 
-insert into ariline_companies
-('Korean Air', 'Seoul');
+insert into airline_companies
+values('Korean Air', 'Seoul');
 
-insert into ariline_companies
-('Air France', 'Paris');
+insert into airline_companies
+values('Air France', 'Paris');
 
-insert into ariline_companies
-('Air India', 'Bombay'); 
+insert into airline_companies
+values('Air India', 'Bombay'); 
+
+insert into airports
+values('PVG');
+
+insert into airports
+values('YVR');
+
+insert into airports
+values('BOM');
+
+insert into airports
+values('PEK');
+
+insert into airports
+values('ICN');
 
 insert into airliner_oo1
-('AC025', 'Air Canada', 'PVG', 'YVR', 'Boeing 767');
+values('AC025', 'Air Canada', 'PVG', 'YVR', 'Boeing 767');
 
 insert into airliner_oo1
-('AC026', 'Air Canada', 'YVR', 'PVG', 'Boeing 767');
+values('AC026', 'Air Canada', 'YVR', 'PVG', 'Boeing 767');
 
 insert into airliner_oo1
-('KE071', 'Korean Air', 'ICN', 'YVR', 'Airbus A320');
+values('KE071', 'Korean Air', 'ICN', 'YVR', 'Airbus A320');
 
 insert into airliner_oo1
-('AI191', 'Air India', 'YVR', 'BOM', 'Boeing 787');
+values('AI191', 'Air India', 'YVR', 'BOM', 'Boeing 787');
 
 insert into airliner_oo1
-('CA7452', 'Air China', 'YVR', 'PEK', 'Airbus A320');
+values('CA7452', 'Air China', 'YVR', 'PEK', 'Airbus A320');
 
 insert into airliner_oo2
-('AC025', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 8:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+values('AC025', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 8:02:44', 'yyyy/mm/dd hh24:mi:ss'));
 
 insert into airliner_oo2
-('AC026', TO_DATE('2016/03/27 13:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+values('AC026', TO_DATE('2016/03/27 13:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
 
 insert into airliner_oo2
-('KE071', TO_DATE('2016/03/27 2:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 9:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+values('KE071', TO_DATE('2016/03/27 2:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 9:02:44', 'yyyy/mm/dd hh24:mi:ss'));
 
 insert into airliner_oo2
-('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/22 11:04:44', 'yyyy/mm/dd hh24:mi:ss'));
+values('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/22 11:04:44', 'yyyy/mm/dd hh24:mi:ss'));
 
 insert into airliner_oo2
-('CA7452', TO_DATE('2016/03/27 18:22:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 17:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+values('CA7452', TO_DATE('2016/03/27 18:22:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 17:02:44', 'yyyy/mm/dd hh24:mi:ss'));
 
 insert into air_alliances
-('Star Alliance');
+values('Star Alliance');
 
 insert into air_alliances
-('SkyTeam');
+values('SkyTeam');
 
 insert into air_alliances
-('Oneworld');
-
-insert into airports
-('PVG');
-
-insert into airports
-('YVR');
-
-insert into airports
-('BOM');
-
-insert into airports
-('PEK');
-
-insert into airports
-('ICN');
+values('Oneworld');
