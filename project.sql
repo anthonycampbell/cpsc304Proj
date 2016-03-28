@@ -29,19 +29,21 @@ create table passengers
 
 grant select on passengers to public;
 
-create table member_companies
-       (aa_name varchar(20) not null,
-       ac_name varchar(20) not null,
-       primary key (aa_name, ac_name));
-
-grant select on member_companies to public;
-
 create table airline_companies
        (ac_name varchar(20) not null,
        location   varchar(20),
        primary key (ac_name));
 
 grant select on airline_companies to public;
+
+create table member_companies
+       (aa_name varchar(20) not null,
+       ac_name varchar(20) not null,
+       primary key (aa_name, ac_name),
+       foreign key (aa_name) references air_alliances,
+       foreign key (ac_name) references airline_companies);
+
+grant select on member_companies to public;
 
 create table airliner_oo1
        (flight# char(6),
@@ -105,20 +107,6 @@ create table on_board
 
 grant select on on_board to public;
 
-insert into member_companies
-values('Star Alliance', 'Air Canada');
-
-insert into member_companies
-values('Star Alliance', 'Air China');
-
-insert into member_companies
-values('Star Alliance', 'Air India');
-
-insert into member_companies
-values('SkyTeam', 'Korean Air');
-
-insert into member_companies
-values('SkyTeam', 'Air France');
 
 insert into airline_companies
 values('Air Canada', 'Dorval');
@@ -134,6 +122,30 @@ values('Air France', 'Paris');
 
 insert into airline_companies
 values('Air India', 'Bombay'); 
+
+insert into air_alliances
+values('Star Alliance');
+
+insert into air_alliances
+values('SkyTeam');
+
+insert into air_alliances
+values('Oneworld');
+
+insert into member_companies
+values('Star Alliance', 'Air Canada');
+
+insert into member_companies
+values('Star Alliance', 'Air China');
+
+insert into member_companies
+values('Star Alliance', 'Air India');
+
+insert into member_companies
+values('SkyTeam', 'Korean Air');
+
+insert into member_companies
+values('SkyTeam', 'Air France');
 
 insert into airports
 values('PVG');
@@ -179,12 +191,3 @@ values('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE
 
 insert into airliner_oo2
 values('CA7452', TO_DATE('2016/03/27 18:22:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 17:02:44', 'yyyy/mm/dd hh24:mi:ss'));
-
-insert into air_alliances
-values('Star Alliance');
-
-insert into air_alliances
-values('SkyTeam');
-
-insert into air_alliances
-values('Oneworld');
