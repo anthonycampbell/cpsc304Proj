@@ -103,3 +103,87 @@ create table on_board
        foreign key (destination) references airports ON DELETE CASCADE);
 
 grant select on on_board to public;
+
+insert into member_companies
+('Star Alliance', 'Air Canada');
+
+insert into member_companies
+('Star Alliance', 'Air China');
+
+insert into member_companies
+('Star Alliance', 'Air India');
+
+insert into member_companies
+('SkyTeam', 'Korean Air');
+
+insert into member_companies
+('SkyTeam', 'Air France');
+
+insert into ariline_companies
+('Air Canada', 'Dorval');
+
+insert into ariline_companies
+('Air China', 'Beijing');
+
+insert into ariline_companies
+('Korean Air', 'Seoul');
+
+insert into ariline_companies
+('Air France', 'Paris');
+
+insert into ariline_companies
+('Air India', 'Bombay'); 
+
+insert into airliner_oo1
+('AC025', 'Air Canada', 'PVG', 'YVR', 'Boeing 767');
+
+insert into airliner_oo1
+('AC026', 'Air Canada', 'YVR', 'PVG', 'Boeing 767');
+
+insert into airliner_oo1
+('KE071', 'Korean Air', 'ICN', 'YVR', 'Airbus A320');
+
+insert into airliner_oo1
+('AI191', 'Air India', 'YVR', 'BOM', 'Boeing 787');
+
+insert into airliner_oo1
+('CA7452', 'Air China', 'YVR', 'PEK', 'Airbus A320');
+
+insert into airliner_oo2
+('AC025', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 8:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+insert into airliner_oo2
+('AC026', TO_DATE('2016/03/27 13:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+insert into airliner_oo2
+('KE071', TO_DATE('2016/03/27 2:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 9:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+insert into airliner_oo2
+('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/22 11:04:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+insert into airliner_oo2
+('CA7452', TO_DATE('2016/03/27 18:22:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 17:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+insert into air_alliances
+('Star Alliance');
+
+insert into air_alliances
+('SkyTeam');
+
+insert into air_alliances
+('Oneworld');
+
+insert into airports
+('PVG');
+
+insert into airports
+('YVR');
+
+insert into airports
+('BOM');
+
+insert into airports
+('PEK');
+
+insert into airports
+('ICN');
