@@ -42,16 +42,17 @@ public class Database {
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(""
 				+ "SELECT * "
-				+ "FROM airliner_oo1, airliner_oo2,"
+				+ "FROM airliner_oo1, airliner_oo2 "
 				+ "WHERE airliner_oo1.flight# = airliner_oo2.flight#");
 		while (rs.next()){
 			String flightNumber = rs.getString("flight#");
-			Date departureTime = rs.getDate("departure_time#");
-			Date arrivalTime = rs.getDate("arrival_time#");
+			String ac_name = rs.getString("ac_name");
+			Date departureTime = rs.getDate("departure_time");
+			Date arrivalTime = rs.getDate("arrival_time");
 			String modelNumber = rs.getString("model#");
-			String departureAirport = rs.getString("from_airport_code#");
-			String arrivalAirport = rs.getString("to_airport_code#");
-			airliners.add(new Airliner(flightNumber, departureTime, arrivalTime, modelNumber,
+			String departureAirport = rs.getString("from_airport_code");
+			String arrivalAirport = rs.getString("to_airport_code");
+			airliners.add(new Airliner(flightNumber, ac_name, departureTime, arrivalTime, modelNumber,
 					departureAirport, arrivalAirport));
 		}
 		stmt.close();

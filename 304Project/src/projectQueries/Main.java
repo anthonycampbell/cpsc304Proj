@@ -21,7 +21,13 @@ public class Main {
 			
 			for (Airliner a : Database.getAirliners()) {
 				System.out.println("==========================");
+				System.out.println(a.ac_name);
 				System.out.println(a.flightNumber);
+				System.out.println(a.departureTime);
+				System.out.println(a.arrivalTime);
+				System.out.println(a.modelNumber);
+				System.out.println(a.departureAirport);
+				System.out.println(a.arrivalAirport);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
