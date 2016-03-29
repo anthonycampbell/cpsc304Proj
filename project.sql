@@ -48,8 +48,8 @@ grant select on member_companies to public;
 create table airliner_oo1
        (flight# char(6),
        ac_name varchar(20) not null,
-       to_airport_code char(3) not null,
        from_airport_code char(3) not null,
+       to_airport_code char(3) not null,
        model# varchar(15),
        primary key (flight#),
        foreign key (ac_name) references airline_companies ON DELETE CASCADE,
@@ -187,7 +187,7 @@ insert into airliner_oo2
 values('KE071', TO_DATE('2016/03/27 2:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 9:02:44', 'yyyy/mm/dd hh24:mi:ss'));
 
 insert into airliner_oo2
-values('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/22 11:04:44', 'yyyy/mm/dd hh24:mi:ss'));
+values('AI191', TO_DATE('2016/03/27 11:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/27 13:04:44', 'yyyy/mm/dd hh24:mi:ss'));
 
 insert into airliner_oo2
 values('CA7452', TO_DATE('2016/03/27 18:22:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2016/03/28 17:02:44', 'yyyy/mm/dd hh24:mi:ss'));
