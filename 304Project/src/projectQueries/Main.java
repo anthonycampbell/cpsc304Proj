@@ -34,6 +34,17 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			for (AirlineCompany ac : Database.getAirlineCompanies()){
+				System.out.println("==========================");
+				System.out.println(ac.name);
+				System.out.println(ac.location);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
