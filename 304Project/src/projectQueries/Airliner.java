@@ -3,12 +3,12 @@ package projectQueries;
 import java.util.Date;
 
 public class Airliner {
-	private String flightNumber;
-	private Date departureTime;
-	private Date arrivalTime;
-	private String modelNumber;
-	private String departureAirport;
-	private String arrivalAirport;
+	public final String flightNumber;
+	public final Date departureTime;
+	public final Date arrivalTime;
+	public final String modelNumber;
+	public final String departureAirport;
+	public final String arrivalAirport;
 	
 	public Airliner(String flightNumber, Date departureTime, Date arrivalTime,
 			String modelNumber, String departureAirport, String arrivalAirport){
