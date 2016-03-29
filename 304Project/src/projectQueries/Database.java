@@ -16,6 +16,9 @@ public class Database {
 	private static Statement statement;
 	private static final String username = "ora_d8x8";
 	private static final String password = "a42701136";
+	
+	final static String GET_PASSENGERS = "SELECT * FROM passengers";
+	//final static String GET_PASSENGERS_BY_FLIGHT_NUMBER = ""
 
 	private Database() {}
 
@@ -53,14 +56,11 @@ public class Database {
 		return renderAirliners(rs);	
 	}
 	
-	// if airportCode is null, return ALL airliners
 	public static List<Airliner> getAirlinersByFromAirport(String airportCode) throws SQLException {
 		String query = "SELECT * "
 				+ "FROM airliner_oo1, airliner_oo2 "
-				+ "WHERE airliner_oo1.flight# = airliner_oo2.flight# ";
-		if (airportCode != null) {
-			query += "AND from_airport_code = '" + airportCode + "'";
-		}
+				+ "WHERE airliner_oo1.flight# = airliner_oo2.flight# "
+				+ "AND from_airport_code = '" + airportCode + "'";
 		ResultSet rs = statement.executeQuery(query);
 		return renderAirliners(rs);	
 	}
