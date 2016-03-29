@@ -37,6 +37,20 @@ public class Database {
 		return list;
 	}
 	
+	public static List<AirlineCompany> getAirlineCompanies() throws SQLException{
+		Statement s = connection.createStatement();
+		ResultSet rs = s.executeQuery("SELECT * FROM airline_companies");
+		List<AirlineCompany> airlineCompanies = new ArrayList<>();
+		while(rs.next()){
+			String name = rs.getString("ac_name");
+			String location = rs.getString("location");
+			AirlineCompany ac = new AirlineCompany(name, location);
+			airlineCompanies.add(ac);
+		}
+		s.close();
+		return airlineCompanies;
+	}
+	
 	public static List<Airliner> getAirliners() throws SQLException{
 		List<Airliner> airliners = new ArrayList<>();
 		Statement stmt = connection.createStatement();
