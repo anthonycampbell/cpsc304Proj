@@ -76,8 +76,7 @@ public class Database {
 	}
 
 	public static List<AirlineCompany> getAirlineCompanies() throws SQLException{
-		Statement s = connection.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * FROM airline_companies");
+		ResultSet rs = statement.executeQuery("SELECT * FROM airline_companies");
 		List<AirlineCompany> airlineCompanies = new ArrayList<>();
 		while(rs.next()){
 			String name = rs.getString("ac_name");
@@ -85,7 +84,6 @@ public class Database {
 			AirlineCompany ac = new AirlineCompany(name, location);
 			airlineCompanies.add(ac);
 		}
-		s.close();
 		return airlineCompanies;
 	}
 	

@@ -11,14 +11,14 @@ public class Main {
 			e.printStackTrace();
 			return;
 		}
-		
+
 		try {
 			for (Passenger p : Database.getPassengersByFlightNumber("AC026")) {
 				System.out.println("==========================");
 				System.out.println(p.passport_num);
 				System.out.println(p.name);
 			}
-			
+
 			for (Airliner a : Database.getAirlinersByPassportNumber(950474950)) {
 				System.out.println("==========================");
 				System.out.println(a.ac_name);
@@ -29,22 +29,19 @@ public class Main {
 				System.out.println(a.departureAirport);
 				System.out.println(a.arrivalAirport);
 			}
-			Database.terminate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
+
 			for (AirlineCompany ac : Database.getAirlineCompanies()){
 				System.out.println("==========================");
 				System.out.println(ac.name);
 				System.out.println(ac.location);
+				Database.terminate();
 			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 }
