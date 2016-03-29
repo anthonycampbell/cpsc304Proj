@@ -34,9 +34,8 @@ public class Main {
 				System.out.println("==========================");
 				System.out.println(ac.name);
 				System.out.println(ac.location);
-				Database.terminate();
 			}
-
+			Database.terminate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
