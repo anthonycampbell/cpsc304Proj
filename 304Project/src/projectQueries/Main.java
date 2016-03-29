@@ -1,5 +1,6 @@
 package projectQueries;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class Main { 
@@ -34,8 +35,21 @@ public class Main {
 				System.out.println("==========================");
 				System.out.println(ac.name);
 				System.out.println(ac.location);
-				Database.terminate();
 			}
+			
+			for (AirAlliance aa : Database.getAirAllianceByAirCompanyName("Korean Air")) {
+				System.out.println("==========================");
+				System.out.println(aa.name);
+			}
+			
+			long time = System.currentTimeMillis();
+			Date d = new Date(time);
+			Date d2 = new Date(time + 60 * 60 * 1000);
+			Airliner a = new Airliner("A000", "Air China", d, d2, "Death 777", "PEK", "ICN");
+			Database.insert(a);
+			Database.delete(a);
+			
+			Database.terminate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
