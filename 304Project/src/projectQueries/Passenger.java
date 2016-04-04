@@ -13,7 +13,7 @@ public class Passenger {
 		this.passport_num = passport_num;
 		this.name = name;
 	}
-	
+	/*
 	public static List<Passenger> render(ResultSet rs) throws SQLException {
 		List<Passenger> list = new ArrayList<>();
 		while (rs.next()) {
@@ -22,6 +22,18 @@ public class Passenger {
 		}
 		rs.close();
 		return list;
+	}
+	*/
+	public static String[][] render(ResultSet rs) throws SQLException {
+		List<String[]> passengers = new ArrayList<>();
+		while (rs.next()){
+			String[] each = new String[2];
+			each[0] = Integer.toString(rs.getInt(1));
+			each[1] = rs.getString(2);
+			passengers.add(each);
+		}
+		rs.close();
+		return passengers.toArray(new String[0][]);
 	}
 	
 }

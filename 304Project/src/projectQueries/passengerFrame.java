@@ -5,6 +5,8 @@
  */
 package projectQueries;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author wanhaoyi
@@ -37,13 +39,33 @@ public class passengerFrame extends javax.swing.JFrame {
         jLabel1.setText("Passenger List of: ");
 
         jTextField1.setEditable(false);
-        jTextField1.setText("jTextField1");
+        //jTextField1.setText(jTextField1.getText());
+        //jTextField1.setText("jTextField1");
+        /*
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-
+*/
+        String[][] passengers;
+		try {
+			passengers = Database.getPassengersByFlightNumber(AirlinersFrame.flight_num);
+			System.out.println("");
+			System.out.println("get text = " + this.jTextField1.getText());
+			System.out.println("get text = " + AirlinersFrame.flight_num);
+			jTable1.setModel(new javax.swing.table.DefaultTableModel(
+		               passengers,
+		                new String [] {
+		                    "Name", "Passport Number"
+		                }
+		            ));
+			Main.printArray(passengers);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        /*
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -55,6 +77,7 @@ public class passengerFrame extends javax.swing.JFrame {
                 "Name", "Passport Number", "Destination"
             }
         ));
+        */
         jTable1.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(jTable1);
 
@@ -119,7 +142,7 @@ public class passengerFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new passengerFrame().setVisible(True);
+                new passengerFrame().setVisible(true);
             }
         });
     }

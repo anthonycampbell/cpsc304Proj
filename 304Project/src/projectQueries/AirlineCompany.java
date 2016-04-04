@@ -13,7 +13,7 @@ public class AirlineCompany {
 		this.name = name;
 		this.location = location;
 	}
-
+/*
 	public static List<AirlineCompany> render(ResultSet rs) throws SQLException {
 		List<AirlineCompany> airlineCompanies = new ArrayList<>();
 		while(rs.next()){
@@ -24,5 +24,18 @@ public class AirlineCompany {
 		}
 		rs.close();
 		return airlineCompanies;
+	}
+	*/
+	
+	public static String[][] render(ResultSet rs) throws SQLException {
+		List<String[]> companies = new ArrayList<>();
+		while (rs.next()){
+			String[] each = new String[2];
+			each[0] = rs.getString("ac_name");
+			each[1] = rs.getString("location");
+			companies.add(each);
+		}
+		rs.close();
+		return companies.toArray(new String[0][]);
 	}
 }

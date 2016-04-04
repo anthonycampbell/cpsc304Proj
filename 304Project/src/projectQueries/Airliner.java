@@ -25,7 +25,7 @@ public class Airliner {
 		this.departureAirport = departureAirport;
 		this.arrivalAirport = arrivalAirport;
 	}
-	
+	/*
 	public static List<Airliner> render(ResultSet rs) throws SQLException {
 		List<Airliner> airliners = new ArrayList<>();
 		while (rs.next()){
@@ -41,6 +41,35 @@ public class Airliner {
 		}
 		rs.close();
 		return airliners;
+	}
+	*/
+	public String[] toArray() {
+		String[] result = {
+				flightNumber,
+				ac_name, 
+				departureTime.toString(), 
+				arrivalTime.toString(),
+				modelNumber, 
+				departureAirport,
+				arrivalAirport};
+		return result;
+	}
+	
+	public static String[][] render(ResultSet rs) throws SQLException {
+		List<String[]> airliners = new ArrayList<>();
+		while (rs.next()){
+			String[] each = new String[7];
+			each[0] = rs.getString("flight#");
+			each[1] = rs.getString("ac_name");
+			each[2] = rs.getDate("departure_time").toString();
+			each[3] = rs.getDate("arrival_time").toString();
+			each[4] = rs.getString("model#");
+			each[5] = rs.getString("from_airport_code");
+			each[6] = rs.getString("to_airport_code");
+			airliners.add(each);
+		}
+		rs.close();
+		return airliners.toArray(new String[0][]);
 	}
 	
 }

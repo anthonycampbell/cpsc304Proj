@@ -1,6 +1,7 @@
 package projectQueries;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,12 +31,12 @@ public class Database {
 	
 	// ========================== GET ===============================
 
-	public static List<Passenger> getPassengers() throws SQLException {
+	public static String[][] getPassengers() throws SQLException {
 		ResultSet rs = statement.executeQuery("SELECT * FROM passengers");
 		return Passenger.render(rs);
 	}
 	
-	public static List<Passenger> getPassengersByFlightNumber(String flightNumber) throws SQLException {
+	public static String[][] getPassengersByFlightNumber(String flightNumber) throws SQLException {
 		ResultSet rs = statement.executeQuery(
 				"SELECT * " +
 				"FROM passengers, on_board " +
@@ -44,7 +45,7 @@ public class Database {
 		return Passenger.render(rs);
 	}
 	
-	public static List<Airliner> getAirliners() throws SQLException {
+	public static String[][] getAirliners() throws SQLException {
 		String query = "SELECT * "
 				+ "FROM airliner_oo1, airliner_oo2 "
 				+ "WHERE airliner_oo1.flight# = airliner_oo2.flight# ";
@@ -52,7 +53,7 @@ public class Database {
 		return Airliner.render(rs);
 	}
 	
-	public static List<Airliner> getAirlinersByFromAirport(String airportCode) throws SQLException {
+	public static String[][] getAirlinersByFromAirport(String airportCode) throws SQLException {
 		String query = "SELECT * "
 				+ "FROM airliner_oo1, airliner_oo2 "
 				+ "WHERE airliner_oo1.flight# = airliner_oo2.flight# "
@@ -61,7 +62,7 @@ public class Database {
 		return Airliner.render(rs);
 	}
 	
-	public static List<Airliner> getAirlinersByPassportNumber(int passport_num) throws SQLException {
+	public static String[][] getAirlinersByPassportNumber(int passport_num) throws SQLException {
 		String query = "SELECT * "
 				+ "FROM on_board, airliner_oo1, airliner_oo2 "                                                                        
 				+ "WHERE on_board.flight# = airliner_oo1.flight# "
@@ -71,12 +72,12 @@ public class Database {
 		return Airliner.render(rs);
 	}
 
-	public static List<AirlineCompany> getAirlineCompanies() throws SQLException{
+	public static String[][] getAirlineCompanies() throws SQLException{
 		ResultSet rs = statement.executeQuery("SELECT * FROM airline_companies");
 		return AirlineCompany.render(rs);
 	}
 	
-	public static List<AirAlliance> getAirAllianceByAirCompanyName(String ac_name) throws SQLException {
+	public static String[][] getAirAllianceByAirCompanyName(String ac_name) throws SQLException {
 		String query = "SELECT * "
 				+ "FROM member_companies "
 				+ "WHERE ac_name = '" + ac_name + "'";
@@ -106,14 +107,36 @@ public class Database {
 	
 	// ============================= DELETE ===========================
 	
-	public static void delete(Airliner a) throws SQLException {
+	public static void delete(String flightNumber, Date departureTime) throws SQLException {
 		statement.executeUpdate("DELETE FROM airliner_oo1 " +
-				"WHERE flight# = '" + a.flightNumber + "'");
+				"WHERE flight# = '" + flightNumber + "'");
 		PreparedStatement ps = connection.prepareStatement("DELETE FROM airliner_oo2 " +
-				"WHERE flight# = '" + a.flightNumber + "' AND departure_time = ?");
-		ps.setDate(1, a.departureTime);
+				"WHERE flight# = '" + flightNumber + "' AND departure_time = ?");
+		ps.setDate(1, departureTime);
 		ps.executeUpdate();
 		ps.close();
+	}
+	
+	// =============================== COUNT ============================
+	public static int countFlightNumber(int passportNum) throws SQLException {
+		String query = "SELECT COUNT(*) "
+				+ "FROM on_board, airliner_oo1, airliner_oo2 "                                                                        
+				+ "WHERE on_board.flight# = airliner_oo1.flight# "
+				+ "AND on_board.flight# = airliner_oo2.flight# "
+				+ "AND on_board.passport# = " + passportNum;
+		ResultSet rs = statement.executeQuery(query);
+		rs.next();
+		return rs.getInt(1);
+	}
+	
+	public static String findMostFlightCompany() {
+		String query = "SELECT COUNT(*) "
+				+ "FROM airliner_oo1, airliner_oo2 "
+				+ "WHERE airliner_oo1.flight# = airliner_oo2.flight# "
+				+ "GROUP BY airliner_oo1.ac_name";
+		ResultSet rs = statement.executeQuery(query);
+		rs.next();
+		return rs.getInt(1);
 	}
 
 }

@@ -11,7 +11,7 @@ public class AirAlliance {
 	public AirAlliance(String name) {
 		this.name = name;
 	}
-	
+	/*
 	public static List<AirAlliance> render(ResultSet rs) throws SQLException {
 		List<AirAlliance> list = new ArrayList<>();
 		while(rs.next()){
@@ -19,5 +19,15 @@ public class AirAlliance {
 		}
 		rs.close();
 		return list;
+	}
+	*/
+	public static String[][] render(ResultSet rs) throws SQLException {
+		List<String[]> alliances = new ArrayList<>();
+		while (rs.next()){
+			String[] each = new String[1];
+			alliances.add(each);
+		}
+		rs.close();
+		return alliances.toArray(new String[0][]);
 	}
 }
