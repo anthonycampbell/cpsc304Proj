@@ -82,7 +82,7 @@ public class Database {
 				+ "FROM member_companies "
 				+ "WHERE ac_name = '" + ac_name + "'";
 		ResultSet rs = statement.executeQuery(query);
-		return AirAlliance.render(rs);
+		return MemberCompany.render(rs);
 	}
 	
 	// =========================== INSERT ===========================
@@ -148,7 +148,7 @@ public class Database {
 				+ "(SELECT airliner_oo1.ac_name "
 				+ "FROM airliner_oo1, on_board "
 				+ "WHERE on_board.passport# = passengers.passport# "
-				+ "AND on_board.flight# = airliner_oo1.flight#";
+				+ "AND on_board.flight# = airliner_oo1.flight#))";
 		ResultSet rs = statement.executeQuery(query);
 		return Passenger.render(rs);
 	}

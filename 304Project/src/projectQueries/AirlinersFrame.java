@@ -90,7 +90,7 @@ public class AirlinersFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setCellSelectionEnabled(true);
+        //1jTable1.setCellSelectionEnabled(true);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -282,16 +282,42 @@ public class AirlinersFrame extends javax.swing.JFrame {
         }
         else if(col == 1) {
             airlineCompanyInfoFrame airlineinfo = new airlineCompanyInfoFrame();
-            airlineinfo.jTextField1.setText(airliners[row][col]);
+            try {
+				String[][] companies = Database.getAirAllianceByAirCompanyName(airliners[row][col]);
+			
+				DefaultTableModel model = new DefaultTableModel (companies,
+                new String[] {"Alliance","Company"});
+            airlineinfo.jTable1.setModel(model);
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+            
+            //airlineinfo.jScrollPane1.hide();
+            //airlineinfo.jTable1.hide();
+            //airlineinfo.jTable1.setModel(model);
+            airlineinfo.jTextField1.hide();
             airlineinfo.setVisible(true);
         }
         
-        else if(col == 3) {
+        else if(col == 5 || col == 6) {
             AirlinersFrame airlineFrame = new AirlinersFrame();
             //airlineFrame.add(javax.swing.JLabel label1 = "YVR Flight Info");
             airlineFrame.remove(airlineFrame.jComboBox1);
-            airlineFrame.jTextField1.setText("YVR");
+            airlineFrame.jTextField1.setText(airliners[row][col]);
             airlineFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+            try {
+				airliners = Database.getAirlinersByFromAirport(airliners[row][col]);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            DefaultTableModel model = new DefaultTableModel (airliners,
+                new String[] {"flight#", "company", "departure time", "arrival time", "model", "from", "to"});
+            airlineFrame.jTable1.setModel(model);
             airlineFrame.setVisible(true);
         }
         
@@ -303,7 +329,7 @@ public class AirlinersFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    	Airliner a = new Airliner(jTextField2.getText(), jTextField3.getText(), Date.valueOf(jTextField4.getText()), Date.valueOf("2016-03-11"), "Boeing 777", "YVR", jTextField5.getText());
+    	Airliner a = new Airliner(jTextField2.getText(), jTextField3.getText(), Date.valueOf(jTextField4.getText()), Date.valueOf(jTextField5.getText()), jTextField6.getText(), jTextField7.getText(), jTextField8.getText());
     	System.out.println(jTextField5.getText());
     	// Airliner a = new Airliner(jTextField2.getText(), jTextField3.getText(), Date.valueOf("2016-03-11"), new Date(System.currentTimeMillis()), "", "", "YVR");
     
@@ -333,8 +359,6 @@ public class AirlinersFrame extends javax.swing.JFrame {
         if (true){
             try {
                 airliners = Database.getAirlinersByFromAirport(jComboBox1.getSelectedItem().toString());
-                //                DefaultTableModel model = new DefaultTableModel (new Object [airliners.size()][7],
-                    //                		new String[] {"a", "b", "c", "d", "e", "f", "g"});
                 DefaultTableModel model = new DefaultTableModel (airliners,
                     new String[] {"flight#", "company", "departure time", "arrival time", "model", "from", "to"});
                 jTable1.setModel(model);
@@ -354,12 +378,36 @@ public class AirlinersFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here: view your bookings
         bookingsFrame frame = new bookingsFrame();
+        try {
+			frame.jTextField1.setText(String.valueOf(Database.countFlightNumber(loginFrame.passportNum)));
+			String[][] myAirliners = Database.getAirlinersByPassportNumber(loginFrame.passportNum);
+            DefaultTableModel model = new DefaultTableModel (myAirliners,
+                new String[] {"flight#", "company", "departure time", "arrival time", "model", "from", "to"});
+            frame.jTable1.setModel(model);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here: view passenger list
         fullPassengerInfoFrame frame = new fullPassengerInfoFrame();
+        try {
+			String[][] passengers = Database.findFrequentTraveller();
+			DefaultTableModel model = new DefaultTableModel (passengers,
+		            new String[] {"Passport#", "Name"});
+		        frame.jTable2.setModel(model);
+		        frame.jScrollPane1.hide();
+		        frame.jTable1.hide();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        //                DefaultTableModel model = new DefaultTableModel (new Object [airliners.size()][7],
+            //                		new String[] {"a", "b", "c", "d", "e", "f", "g"});
+        
         frame.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

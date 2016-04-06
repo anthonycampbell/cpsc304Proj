@@ -14,9 +14,9 @@ public class Main {
 		}
 
 		try {
-			String[][] arr = Database.getAirlinersByFromAirport("YVR");
+			String[][] arr = Database.getAirAllianceByAirCompanyName("Air Canada");
 			printArray(arr);
-			
+			/*
 			arr = Database.getAirliners();
 			printArray(arr);
 			//System.out.println( " has taken " + count + " flights");

@@ -25,6 +25,7 @@ public class AirAlliance {
 		List<String[]> alliances = new ArrayList<>();
 		while (rs.next()){
 			String[] each = new String[1];
+			each[0] = rs.getString(1);
 			alliances.add(each);
 		}
 		rs.close();
