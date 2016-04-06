@@ -379,7 +379,7 @@ public class AirlinersFrame extends javax.swing.JFrame {
         // TODO add your handling code here: view your bookings
         bookingsFrame frame = new bookingsFrame();
         try {
-			frame.jTextField1.setText(String.valueOf(Database.countFlightNumber(loginFrame.passportNum)));
+			frame.jTextField1.setText(String.valueOf(Database.countFlightNumber(loginFrame.passportNum))+" Most of Which "+ Database.findMostFlightCompany(loginFrame.passportNum));
 			String[][] myAirliners = Database.getAirlinersByPassportNumber(loginFrame.passportNum);
             DefaultTableModel model = new DefaultTableModel (myAirliners,
                 new String[] {"flight#", "company", "departure time", "arrival time", "model", "from", "to"});

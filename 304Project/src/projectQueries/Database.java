@@ -128,17 +128,20 @@ public class Database {
 		rs.next();
 		return rs.getInt(1);
 	}
-	/*
-	public static String findMostFlightCompany() {
-		String query = "SELECT COUNT(*) "
-				+ "FROM airliner_oo1, airliner_oo2 "
-				+ "WHERE airliner_oo1.flight# = airliner_oo2.flight# "
-				+ "GROUP BY airliner_oo1.ac_name";
+	
+	public static String findMostFlightCompany(int passportNum) throws SQLException {
+		String query = "SELECT ac_name "
+				+ "FROM (select ac_name "
+				+ "FROM on_board, airliner_oo1 "
+				+ "WHERE on_board.passport# = " + passportNum + " "
+				+ "GROUP BY ac_name "
+				+ "ORDER BY COUNT(*) desc) "
+				+ "where ROWNUM = 1";
 		ResultSet rs = statement.executeQuery(query);
 		rs.next();
-		return rs.getInt(1);
+		return rs.getString(1);
 	}
-*/
+	
 	public static String[][] findFrequentTraveller() throws SQLException {
 		String query = "SELECT * "
 				+ "FROM passengers "
