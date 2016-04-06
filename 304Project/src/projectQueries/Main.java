@@ -1,6 +1,6 @@
 package projectQueries;
 
-import java.sql.Date;
+
 import java.sql.SQLException;
 
 public class Main { 
@@ -14,8 +14,12 @@ public class Main {
 		}
 
 		try {
-			int count = Database.countFlightNumber(935485836);
-			System.out.println( " has taken " + count + " flights");
+			String[][] arr = Database.getAirlinersByFromAirport("YVR");
+			printArray(arr);
+			
+			arr = Database.getAirliners();
+			printArray(arr);
+			//System.out.println( " has taken " + count + " flights");
 			/*
 			for (Passenger p : Database.getPassengersByFlightNumber("AC026")) {
 				System.out.println("==========================");
@@ -65,6 +69,7 @@ public class Main {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.print("abc");
 			e.printStackTrace();
 		}
 

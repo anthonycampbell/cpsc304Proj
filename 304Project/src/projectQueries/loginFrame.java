@@ -135,6 +135,7 @@ public class loginFrame extends javax.swing.JFrame {
             frame.setVisible(true);
             this.setVisible(false);
             this.userMode = 2;
+            frame.jButton3.hide();
         }
         else {
         	System.out.print("login successful!");
@@ -143,18 +144,26 @@ public class loginFrame extends javax.swing.JFrame {
             frame.setVisible(true);
             this.setVisible(false);
             this.userMode = 1;
+           
             frame.jLabel2.hide();
             frame.jLabel3.hide();
             frame.jLabel4.hide();
             frame.jLabel5.hide();
+            frame.jLabel6.hide();
+            frame.jLabel7.hide();
+            frame.jLabel8.hide();
             
             frame.jTextField2.hide();
             frame.jTextField3.hide();
             frame.jTextField4.hide();
             frame.jTextField5.hide();
+            frame.jTextField6.hide();
+            frame.jTextField7.hide();
+            frame.jTextField8.hide();
             
             frame.jButton1.hide();
             frame.jButton2.hide();
+            frame.jButton4.hide();
             //this.jLabel3.setText("Wrong User name and password combination!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed

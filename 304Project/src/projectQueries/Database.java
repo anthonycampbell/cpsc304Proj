@@ -128,7 +128,7 @@ public class Database {
 		rs.next();
 		return rs.getInt(1);
 	}
-	
+	/*
 	public static String findMostFlightCompany() {
 		String query = "SELECT COUNT(*) "
 				+ "FROM airliner_oo1, airliner_oo2 "
@@ -138,5 +138,18 @@ public class Database {
 		rs.next();
 		return rs.getInt(1);
 	}
-
+*/
+	public static String[][] findFrequentTraveller() throws SQLException {
+		String query = "SELECT * "
+				+ "FROM passengers "
+				+ "WHERE NOT EXISTS ((SELECT ac_name "
+				+ "FROM airline_companies) "
+				+ "minus "
+				+ "(SELECT airliner_oo1.ac_name "
+				+ "FROM airliner_oo1, on_board "
+				+ "WHERE on_board.passport# = passengers.passport# "
+				+ "AND on_board.flight# = airliner_oo1.flight#";
+		ResultSet rs = statement.executeQuery(query);
+		return Passenger.render(rs);
+	}
 }
